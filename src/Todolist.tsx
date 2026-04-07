@@ -1,29 +1,46 @@
-export const Todolist = () => {
+import { Button } from "./Button";
+
+export type TasksType = {
+  id: number;
+  title: string;
+  isDone: boolean;
+};
+
+export type TodolistPropsType = {
+  title: string;
+  tasks: TasksType[];
+};
+
+export const Todolist = ({ title, tasks }: TodolistPropsType) => {
   return (
     <div>
-          <h3>What to learn</h3>
-          <div>
-            <input/>
-            <button>+</button>
-          </div>
-          <ul>
-            <li>
-              <input type="checkbox" checked={true}/> <span>HTML&CSS</span>
-            </li>
-            <li>
-              <input type="checkbox" checked={true}/> <span>JS</span>
-            </li>
-            <li>
-              <input type="checkbox" checked={false}/> <span>React</span>
-            </li>
-          </ul>
-          <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
-          </div>
-        </div>
-  )
-}
+      <h3>{title}</h3>
+      <div>
+        <input />
+        <button>+</button>
+      </div>
+      <ul>
+        {tasks.length === 0 ? (
+          <span>There is no tasks</span>
+        ) : (
+          tasks.map((task) => {
+            return (
+              <li key={task.id}>
+                <input type="checkbox" checked={task.isDone} />{" "}
+                <span>{task.title}</span>
+              </li>
+            );
+          })
+        )}
+        {}
+      </ul>
+      <div>
+        <Button title="All"/>
+        <Button title="Active"/>
+        <Button title="Completed"/>
+      </div>
+    </div>
+  );
+};
 
-export default Todolist
+export default Todolist;
